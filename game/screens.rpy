@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 ## Initialization
 ################################################################################
 
@@ -357,11 +357,13 @@ screen main_menu():
     ## This ensures that any other menu screen is replaced.
     tag menu
 
+    style_prefix "main_menu"
+
     add gui.main_menu_background
 
     ## This empty frame darkens the main menu.
     frame:
-        style "main_menu_frame"
+        pass
 
     ## The use statement includes another screen inside this one. The actual
     ## contents of the main menu are in the navigation screen.
@@ -370,8 +372,6 @@ screen main_menu():
     if gui.show_name:
 
         vbox:
-            style "main_menu_vbox"
-
             text "[config.name!t]":
                 style "main_menu_title"
 
@@ -564,6 +564,10 @@ screen about():
                 text "[gui.about!t]\n"
 
             text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+
+
+## This is redefined in options.rpy to add text to the about screen.
+define gui.about = ""
 
 
 style about_label is gui_label
@@ -919,7 +923,7 @@ screen history():
 
 ## This determines what tags are allowed to be displayed on the history screen.
 
-define gui.history_allow_tags = { "alt", "noalt" }
+define gui.history_allow_tags = set()
 
 
 style history_window is empty
@@ -1505,10 +1509,10 @@ style vslider:
     base_bar Frame("gui/phone/slider/vertical_[prefix_]bar.png", gui.vslider_borders, tile=gui.slider_tile)
     thumb "gui/phone/slider/vertical_[prefix_]thumb.png"
 
-style slider_vbox:
+style slider_pref_vbox:
     variant "small"
     xsize None
 
-style slider_slider:
+style slider_pref_slider:
     variant "small"
     xsize 600
